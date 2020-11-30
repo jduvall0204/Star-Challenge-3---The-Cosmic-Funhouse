@@ -1,4 +1,4 @@
-# **Star-Challenge-3---The-Cosmic-Funhouse**
+# **Star Challenge 3: The Cosmic Funhouse**
 
 ## Personal project recreating a choose-your-own-adventure book.
 
