@@ -1,6 +1,6 @@
-#**Star-Challenge-3---The-Cosmic-Funhouse**
+#**Star-Challenge-3---The-Cosmic-Funhouse**#
 
-##Personal project recreating a choose-your-own-adventure book.
+##Personal project recreating a choose-your-own-adventure book.##
 
 As a kid I loved reading choose your own adventures.  This program is my attempt to recreate the experience of reading one of those classic books.  The text is from a book originally ublished in 1984.  
 
