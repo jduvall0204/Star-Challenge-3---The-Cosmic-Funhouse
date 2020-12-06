@@ -8,21 +8,19 @@ using System.Threading.Tasks;
 
 namespace Choose_Your_Own_Adventure___Star_Challenge.DAO
 {
-    class PagesSqlDAO : IPagesDAO
+    class ChoicesSqlDAO : IChoicesDAO
     {
-        
         private string connectionString;
-        private const string SQL_ShowPageText = "SELECT * from pages WHERE pageNumber = @pageNumber;";
+        private const string SQL_ShowChoiceText = "SELECT * from choices WHERE pageNumber = @pageNumber;";
         //private const string SQL_ShowCoverPageText = "SELECT text from pages where id = 1;";
-        public PagesSqlDAO(string databaseconnectionString)
+        public ChoicesSqlDAO(string databaseconnectionString)
         {
             connectionString = databaseconnectionString;
         }
 
-
-        public IList<Page> ShowPageByPageNumber(int pageNumber)
+        public IList<Choice> ShowChoiceByPageNumber(int pageNumber)
         {
-            List<Page> output = new List<Page>();
+            List<Choice> output = new List<Choice>();
 
             try
             {
@@ -30,14 +28,14 @@ namespace Choose_Your_Own_Adventure___Star_Challenge.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(SQL_ShowPageText, conn);
+                    SqlCommand cmd = new SqlCommand(SQL_ShowChoiceText, conn);
                     cmd.Parameters.AddWithValue("@pageNumber", pageNumber);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        Page p = GetPageFromReader(reader);
-                        output.Add(p);
+                        Choice c = GetChoiceFromReader(reader);
+                        output.Add(c);
                     }
                 }
             }
@@ -49,16 +47,16 @@ namespace Choose_Your_Own_Adventure___Star_Challenge.DAO
             return output;
         }
 
-        private Page GetPageFromReader(SqlDataReader reader)
+        private Choice GetChoiceFromReader(SqlDataReader reader)
         {
-            Page p = new Page();
-            p.PageNumber = Convert.ToInt32(reader["pageNumber"]);
-            p.PageText = Convert.ToString(reader["pageText"]);
-            
+            Choice c = new Choice();
+            c.ChoiceId = Convert.ToInt32(reader["choice_id"]);
+            c.PageNumber = Convert.ToInt32(reader["pageNumber"]);
+            c.ChoiceText = Convert.ToString(reader["choiceText"]);
+            c.PageChosen = Convert.ToInt32(reader["pageChosen"]);
 
-            return p;
+
+            return c;
         }
-
-        
     }
 }

@@ -12,29 +12,42 @@ namespace Choose_Your_Own_Adventure___Star_Challenge
     class ChooseYourOwnAdventureCLI
     {
         public IPagesDAO PagesDAO { get; }
-        public ChooseYourOwnAdventureCLI(IPagesDAO pagesDAO)
+        public IChoicesDAO ChoicesDAO { get; }
+        public ChooseYourOwnAdventureCLI(IPagesDAO pagesDAO, IChoicesDAO choicesDAO)
         {
             PagesDAO = pagesDAO;
+            ChoicesDAO = choicesDAO;
         }
 
         public void RunCLI()
         {
             PrintTitle();
+            PrintCover();
 
             PageSearch();
-            
+            ChoiceSearch();
             
         }
 
         private void PageSearch()
         {
-            int pageId = 5;
-            IList<Pages> pages = PagesDAO.ShowPageById(pageId);
-            foreach(Pages page in pages)
+            int pageNumber = 8;
+            IList<Page> output = PagesDAO.ShowPageByPageNumber(pageNumber);
+            foreach(Page page in output)
             {
-                Console.WriteLine(page.Text.ToString());
+                Console.WriteLine(page.PageText.ToString());
             }
 
+        }
+
+        private void ChoiceSearch()
+        {
+            int pageNumber = 3;
+            IList<Choice> output = ChoicesDAO.ShowChoiceByPageNumber(pageNumber);
+            foreach(Choice choice in output)
+            {
+                Console.WriteLine(choice.ChoiceText.ToString());
+            }
         }
 
         private void PrintTitle()
@@ -50,6 +63,9 @@ namespace Choose_Your_Own_Adventure___Star_Challenge
             Console.WriteLine();
         }
 
-        
+        private void PrintCover()
+        {
+            Console.WriteLine("THE COSMIC FUNHOUSE");
+        }
     }
 }

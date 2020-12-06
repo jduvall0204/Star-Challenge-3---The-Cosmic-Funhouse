@@ -9,7 +9,7 @@ namespace Choose_Your_Own_Adventure___Star_Challenge.DAO
 {
     public interface IPagesDAO
     {
-        IList<Pages> ShowPageById(int pageId);
+        IList<Page> ShowPageByPageNumber(int pageNumber);
 
       
     }
